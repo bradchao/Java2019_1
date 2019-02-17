@@ -21,6 +21,18 @@ public class Brad18 {
 		for (int v : e) {
 			System.out.println(v);
 		}
+		System.out.println("---");
+		int[] a1 = new int[2];
+		int[] a2;
+		a2 = new int[] {1,2,3};
+		int[] a3 = {1,2,3};
+		for (int v : a3) {
+			System.out.println(v);
+		}
+		
+		
+		
+		
 		
 		
 		
