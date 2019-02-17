@@ -3,8 +3,6 @@ package tw.org.iii.myjava;
 public class PokerV2 {
 
 	public static void main(String[] args) {
-		//
-		long start = System.currentTimeMillis();
 		int[] poker = new int[52];
 		boolean isDup;
 		int temp;
@@ -27,7 +25,23 @@ public class PokerV2 {
 			System.out.println(poker[i]);
 		}
 		System.out.println("---");
-		System.out.println(System.currentTimeMillis()-start);
+		
+		int[][] players = new int[4][13];
+		for(int i=0; i<poker.length; i++) {
+			players[i%4][i/4] = poker[i];
+		}
+		
+		for (int card : players[1]) {
+			System.out.print(card + " ");
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 }
