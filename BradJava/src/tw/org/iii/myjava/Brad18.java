@@ -17,6 +17,11 @@ public class Brad18 {
 		for (int i=0; i<e.length; i++) {
 			System.out.println(e[i]);
 		}
+		System.out.println("---");
+		for (int v : e) {
+			System.out.println(v);
+		}
+		
 		
 		
 	}
