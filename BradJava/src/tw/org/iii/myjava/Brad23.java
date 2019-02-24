@@ -12,11 +12,10 @@ public class Brad23 {
 		System.out.println(b1.getSpeed());
 		
 		BikeV2 b2 = new BikeV2();
-		b2.chGear(2);
 		b2.upSpeed();
 		b2.upSpeed();
 		System.out.println(b2.getSpeed());
-		b2.downSpeed();
+		b2.upSpeed(3);
 		System.out.println(b2.getSpeed());
 		
 	}
