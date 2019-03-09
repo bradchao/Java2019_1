@@ -3,6 +3,9 @@ package tw.org.iii.myjava;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,7 +35,10 @@ public class Brad43 extends JFrame implements ActionListener {
 		
 		setSize(640, 480);
 		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		
+		//setDefaultCloseOperation(EXIT_ON_CLOSE);
+		addWindowListener(new MyAdapter());
 	}
 	
 	void setLabelText(String text) {
@@ -58,6 +64,22 @@ public class Brad43 extends JFrame implements ActionListener {
 		}
 		
 	}
+}
+
+class MyAdapter extends WindowAdapter {
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		//super.windowClosed(arg0);
+		System.out.println("ed");
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		//super.windowClosing(arg0);
+		System.out.println("ing");
+	}
+	
 }
 
 class MyListener implements ActionListener {
