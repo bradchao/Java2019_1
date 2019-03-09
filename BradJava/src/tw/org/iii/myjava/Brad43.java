@@ -8,9 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class Brad43 extends JFrame{
-	private JButton btnOk;
-	private JLabel labelMessage;
+public class Brad43 extends JFrame implements ActionListener {
+	private JButton btnOk, btn2;
+	private JLabel labelMessage, label2;
 	
 	public Brad43() {
 		
@@ -18,11 +18,16 @@ public class Brad43 extends JFrame{
 		
 		btnOk = new JButton("Click Me");
 		add(btnOk, BorderLayout.NORTH);
+		btn2= new JButton("Click 2");
+		add(btn2, BorderLayout.WEST);
 		
 		labelMessage = new JLabel("here");
 		add(labelMessage, BorderLayout.SOUTH);
+		label2 = new JLabel("there");
+		add(label2, BorderLayout.EAST);
 		
-		btnOk.addActionListener(new MyListener(this));
+		btnOk.addActionListener(this);
+		btn2.addActionListener(this);
 		
 		
 		setSize(640, 480);
@@ -37,6 +42,21 @@ public class Brad43 extends JFrame{
 	
 	public static void main(String[] args) {
 		new Brad43();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		int rand = (int)(Math.random()*49+1);
+		//System.out.println(e.getActionCommand());
+		Object source = e.getSource();
+		if (source == btnOk) {
+			System.out.println("A");
+			labelMessage.setText("" + rand);
+		}else if (source == btn2) {
+			System.out.println("B");
+			label2.setText("" + (rand+100));
+		}
+		
 	}
 }
 
