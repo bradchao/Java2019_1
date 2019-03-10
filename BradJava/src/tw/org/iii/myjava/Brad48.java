@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -15,6 +16,7 @@ public class Brad48 extends JFrame {
 	private JButton guess;
 	private JTextArea log;
 	private String answer;
+	private int n = 4, counter;
 	
 	public Brad48() {
 		super("猜數字遊戲");
@@ -41,7 +43,10 @@ public class Brad48 extends JFrame {
 			}
 		});
 		
-		answer = createAnswer(4);
+		answer = createAnswer(n);
+		counter = 0;
+		
+		System.out.println(answer);
 		
 		setSize(640, 480);
 		setVisible(true);
@@ -49,8 +54,31 @@ public class Brad48 extends JFrame {
 	}
 	
 	private void doGuess() {
+		counter++;
 		String strInput = input.getText();
-		log.append(strInput + "\n");
+		String result = checkAB(answer, strInput);
+		log.append(counter + ". " + strInput + ":" + result + "\n");
+		
+		if (result.equals(n + "A0B")) {
+			JOptionPane.showMessageDialog(null, "恭喜老爺, 賀喜夫人");
+		}else if (counter == 3) {
+			JOptionPane.showMessageDialog(null, "Loser: " + answer);
+		}
+		
+	}
+	
+	private static String checkAB(String a, String g) {
+		int A, B; A= B=0;
+		
+		for (int i=0; i<g.length(); i++) {
+			if (g.charAt(i) == a.charAt(i)) {
+				A++;
+			}else if (a.indexOf(g.charAt(i))>=0) {
+				B++;
+			}
+		}
+		
+		return A+"A"+B+"B";
 	}
 	
 	private static String createAnswer(int n) {
