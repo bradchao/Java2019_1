@@ -49,7 +49,8 @@ public class Brad48 extends JFrame {
 	}
 	
 	private void doGuess() {
-		
+		String strInput = input.getText();
+		log.append(strInput + "\n");
 	}
 	
 	private static String createAnswer(int n) {
