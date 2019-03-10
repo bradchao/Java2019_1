@@ -1,6 +1,8 @@
 package tw.org.iii.myjava;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,6 +29,9 @@ public class Brad48 extends JFrame {
 		guess = new JButton("Guess");
 		log = new JTextArea();
 		
+		input.setFont(new Font("Default", Font.BOLD, 24));
+		log.setFont(new Font("Default", Font.BOLD + Font.ITALIC, 24));
+		input.setForeground(Color.red);
 		
 		add(log, BorderLayout.CENTER);
 		
@@ -55,7 +60,7 @@ public class Brad48 extends JFrame {
 	
 	private void doGuess() {
 		counter++;
-		String strInput = input.getText();
+		String strInput = input.getText(); input.setText("");
 		String result = checkAB(answer, strInput);
 		log.append(counter + ". " + strInput + ":" + result + "\n");
 		
