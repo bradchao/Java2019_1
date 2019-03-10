@@ -1,6 +1,8 @@
 package tw.org.iii.myjava;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,10 +33,21 @@ public class Brad48 extends JFrame {
 		
 		add(top, BorderLayout.NORTH);
 		
+		guess.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				doGuess();
+			}
+		});
+		
 		
 		setSize(640, 480);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
+	
+	private void doGuess() {
+		
 	}
 	
 	
