@@ -14,6 +14,7 @@ public class Brad48 extends JFrame {
 	private JTextField input;
 	private JButton guess;
 	private JTextArea log;
+	private String answer;
 	
 	public Brad48() {
 		super("猜數字遊戲");
@@ -40,6 +41,7 @@ public class Brad48 extends JFrame {
 			}
 		});
 		
+		answer = createAnswer(4);
 		
 		setSize(640, 480);
 		setVisible(true);
@@ -50,6 +52,35 @@ public class Brad48 extends JFrame {
 		
 	}
 	
+	private static String createAnswer(int n) {
+		int[] poker = new int[10];
+		boolean isDup;
+		int temp;
+		for (int i=0; i<poker.length; i++) {
+			do {
+				temp = (int)(Math.random()*10);	// 0 - 51
+				// 檢查機制
+				isDup = false;
+				for (int j=0; j<i; j++) {
+					if (poker[j] == temp) {
+						//就重複了
+						isDup = true;
+						break;
+					}
+				}
+				
+			}while (isDup);
+			
+			poker[i] = temp;	
+		}
+		
+		StringBuffer sb = new StringBuffer();
+		for (int i=0; i<n; i++) {
+			sb.append(poker[i]);
+		}
+		
+		return sb.toString();
+	}
 	
 	public static void main(String[] args) {
 		new Brad48();
