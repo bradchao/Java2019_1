@@ -12,7 +12,7 @@ public class Brad02 {
 		
 		char c1 = 97;	// 'a' => ASCII
 		char c2 = 'a';
-		char c3 = 'Ä_';
+		char c3 = 'æ–‡';
 		char c4 = '\u6587';
 		System.out.println(c4);
 		

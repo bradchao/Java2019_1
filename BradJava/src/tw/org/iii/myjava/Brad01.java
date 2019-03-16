@@ -3,7 +3,7 @@ package tw.org.iii.myjava;
 public class Brad01 {
 
 	public static void main(String[] args) {
-		// ¾ã¼Æ
+		// ï¿½ï¿½ï¿½
 		byte var1; 
 		var1 = 123;
 		System.out.println(var1);
@@ -14,9 +14,7 @@ public class Brad01 {
 		byte var3, var4 = 123, var5;
 		var3 = var5 = var4;
 		
-		byte ÅÜ¼Æ1;
-		ÅÜ¼Æ1 = 125;
-		System.out.println(ÅÜ¼Æ1);
+		byte è®Šæ•¸1;
 		
 		short var7 = 32767;
 		
