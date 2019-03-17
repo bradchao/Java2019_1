@@ -11,7 +11,7 @@ public class Brad80 {
 
 	public static void main(String[] args) {
 		try {
-			URL url = new URL("http://www.bradchao.com/img/about-image.jpg");
+			URL url = new URL("https://pdfmyurl.com/index.php?url=http://www.bradchao.com");
 			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 			conn.connect();
 			
@@ -23,7 +23,7 @@ public class Brad80 {
 //			}
 //			reader.close();
 
-			FileOutputStream fout = new FileOutputStream("mytest/upload/coffee.jpg");
+			FileOutputStream fout = new FileOutputStream("mytest/upload/coffee.pdf");
 			BufferedInputStream bin = new BufferedInputStream(conn.getInputStream());
 
 			int len; byte[] buf = new byte[4096];
