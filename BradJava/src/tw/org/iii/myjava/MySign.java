@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 public class MySign extends JFrame{
 	private JButton clear, undo, redo, saveJPEG, saveObj, loadObj;
+	private MyView myView;
 	
 	public MySign() {
 		super("簽名城市");
@@ -24,6 +25,8 @@ public class MySign extends JFrame{
 		
 		add(top, BorderLayout.NORTH);
 		
+		myView = new MyView();
+		add(myView, BorderLayout.CENTER);
 		
 		
 		setSize(640, 480);
