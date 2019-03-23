@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class MySign extends JFrame{
@@ -22,9 +23,11 @@ public class MySign extends JFrame{
 		undo = new JButton("Undo");
 		redo = new JButton("Redo");
 		saveJPEG = new JButton("Save JPG");
+		saveObj = new JButton("Save Obj");
 		
 		JPanel top = new JPanel(new FlowLayout());
 		top.add(clear);top.add(undo);top.add(redo); top.add(saveJPEG);
+		top.add(saveObj);
 		
 		add(top, BorderLayout.NORTH);
 		
@@ -55,10 +58,21 @@ public class MySign extends JFrame{
 		saveJPEG.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				myView.saveJPEG();
+				try {
+					myView.saveJPEG();
+					JOptionPane.showMessageDialog(null, "Save Jpeg OK");
+				}catch(Exception ee) {
+					JOptionPane.showMessageDialog(null, "Save Jpeg Fail");
+				}
 			}
 		});
 
+		saveObj.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		
 		setSize(640, 480);
 		setVisible(true);

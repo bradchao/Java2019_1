@@ -108,7 +108,7 @@ public class MyView extends JPanel {
 		}
 	}
 	
-	public void saveJPEG() {
+	public void saveJPEG() throws IOException {
 		BufferedImage paintImage = new BufferedImage(viewW, viewH, BufferedImage.TYPE_3BYTE_BGR);
 		Graphics2D g2d = paintImage.createGraphics();
 		paint(g2d);
@@ -116,7 +116,7 @@ public class MyView extends JPanel {
 		try{
 	        ImageIO.write(paintImage, "jpeg", new File("mytest/brad.jpg"));
         }catch(IOException e){
-        	System.out.println(e.toString());
+        	throw new IOException();
         }
 		
 	}
