@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import javax.swing.JPanel;
 
 public class MyView extends JPanel {
-	private LinkedList<LinkedList<HashMap<String,Integer>>> lines;
+	private LinkedList<LinkedList<HashMap<String,Integer>>> lines, recycler;
 	
 	
 	public MyView() {
@@ -22,6 +22,7 @@ public class MyView extends JPanel {
 		addMouseMotionListener(myMouseListener);
 		
 		lines = new LinkedList<>();
+		recycler = new LinkedList<>();
 	}
 
 	@Override
@@ -63,6 +64,8 @@ public class MyView extends JPanel {
 			
 			lines.add(line);
 			
+			recycler.clear();
+			
 		}
 		
 		 
@@ -70,7 +73,22 @@ public class MyView extends JPanel {
 	
 	public void clearView() {
 		lines.clear();
+		recycler.clear();
 		repaint();
+	}
+	
+	public void undo() {
+		if (lines.size()>0) {
+			recycler.add(lines.removeLast());
+			repaint();
+		}
+	}
+	
+	public void redo() {
+		if (recycler.size()>0) {
+			lines.add(recycler.removeLast());
+			repaint();
+		}
 	}
 	
 	private static HashMap<String,Integer> parsePoint(MouseEvent e){

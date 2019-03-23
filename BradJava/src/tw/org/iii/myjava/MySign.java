@@ -37,6 +37,20 @@ public class MySign extends JFrame{
 			}
 		});
 		
+		undo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				myView.undo();
+			}
+		});
+		
+		redo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				myView.redo();
+			}
+		});
+		
 		
 		setSize(640, 480);
 		setVisible(true);
