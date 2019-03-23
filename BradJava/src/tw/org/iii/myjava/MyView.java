@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -16,7 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class MyView extends JPanel {
-	private LinkedList<LinkedList<HashMap<String,Integer>>> lines, recycler;
+	private LinkedList<LinkedList<MyPoint>> lines, recycler;
 	private int viewW, viewH;
 	private boolean isInit;
 	private Color color;
@@ -51,11 +52,19 @@ public class MyView extends JPanel {
 		g2d.setColor(color);
 		g2d.setStroke(new BasicStroke(4));
 
-		for (LinkedList<HashMap<String,Integer>> line : lines) {
+//		for (LinkedList<HashMap<String,Integer>> line : lines) {
+//			for (int i=1; i<line.size(); i++) {
+//				HashMap<String,Integer> p0 = line.get(i-1);
+//				HashMap<String,Integer> p1 = line.get(i);
+//				g2d.drawLine(p0.get("x"), p0.get("y"), p1.get("x"), p1.get("y"));
+//				
+//			}
+//		}
+		for (LinkedList<MyPoint> line : lines) {
 			for (int i=1; i<line.size(); i++) {
-				HashMap<String,Integer> p0 = line.get(i-1);
-				HashMap<String,Integer> p1 = line.get(i);
-				g2d.drawLine(p0.get("x"), p0.get("y"), p1.get("x"), p1.get("y"));
+				MyPoint p0 = line.get(i-1);
+				MyPoint p1 = line.get(i);
+				g2d.drawLine(p0.getX(), p0.getY(), p1.getX(), p1.getY());
 				
 			}
 		}
@@ -71,7 +80,8 @@ public class MyView extends JPanel {
 		@Override
 		public void mouseDragged(MouseEvent e) {
 			super.mouseDragged(e);
-			HashMap<String,Integer> point = parsePoint(e);
+//			HashMap<String,Integer> point = parsePoint(e);
+			MyPoint point = parseMyPoint(e);
 			
 			lines.getLast().add(point);
 			repaint();
@@ -80,10 +90,11 @@ public class MyView extends JPanel {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			super.mousePressed(e);
-			HashMap<String,Integer> point = parsePoint(e);
+//			HashMap<String,Integer> point = parsePoint(e);
+			MyPoint point = parseMyPoint(e);
 			
 			// a new Line
-			LinkedList<HashMap<String,Integer>> line = new LinkedList<>();
+			LinkedList<MyPoint> line = new LinkedList<>();
 			line.add(point);
 			
 			lines.add(line);
@@ -115,10 +126,10 @@ public class MyView extends JPanel {
 		}
 	}
 	
-	public LinkedList<LinkedList<HashMap<String,Integer>>> getLines(){
+	public LinkedList<LinkedList<MyPoint>> getLines(){
 		return lines;
 	}
-	public void setLines(LinkedList<LinkedList<HashMap<String,Integer>>> lines) {
+	public void setLines(LinkedList<LinkedList<MyPoint>> lines) {
 		this.lines = lines;
 		repaint();
 	}
@@ -142,7 +153,24 @@ public class MyView extends JPanel {
 		point.put("x", ex); point.put("y", ey);
 		return point;
 	}
-	
-	
+	private static MyPoint parseMyPoint(MouseEvent e){
+		int ex = e.getX(), ey = e.getY();
+		return new MyPoint(ex, ey);
+	}
 	
 }
+
+class MyPoint implements Serializable{
+	private int x, y;
+	MyPoint(int x, int y){this.x=x; this.y=y;}
+	int getX() {return x;}
+	int getY() {return y;}
+}
+class MyLine implements Serializable {
+	private LinkedList<MyPoint> line;
+	private Color color;
+	private float width;
+	
+}
+
+

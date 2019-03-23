@@ -114,7 +114,7 @@ public class MySign extends JFrame{
 	}
 	
 	private void saveObj() {
-		LinkedList<LinkedList<HashMap<String,Integer>>> lines = myView.getLines();
+		LinkedList<LinkedList<MyPoint>> lines = myView.getLines();
 		try {
 			ObjectOutputStream oout = 
 				new ObjectOutputStream(new FileOutputStream("mytest/mysign.obj"));
@@ -131,8 +131,8 @@ public class MySign extends JFrame{
 		try {
 			ObjectInputStream oin = 
 					new ObjectInputStream(new FileInputStream("mytest/mysign.obj"));
-			LinkedList<LinkedList<HashMap<String,Integer>>> lines = 
-					(LinkedList<LinkedList<HashMap<String,Integer>>>)oin.readObject();
+			LinkedList<LinkedList<MyPoint>> lines = 
+					(LinkedList<LinkedList<MyPoint>>)oin.readObject();
 			oin.close();
 			myView.setLines(lines);
 		}catch(Exception e) {
