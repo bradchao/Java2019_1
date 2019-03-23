@@ -19,6 +19,7 @@ public class MyView extends JPanel {
 	private LinkedList<LinkedList<HashMap<String,Integer>>> lines, recycler;
 	private int viewW, viewH;
 	private boolean isInit;
+	private Color color;
 	
 	public MyView() {
 		setBackground(Color.YELLOW);
@@ -29,7 +30,7 @@ public class MyView extends JPanel {
 		lines = new LinkedList<>();
 		recycler = new LinkedList<>();
 		
-		
+		color = Color.BLUE;
 		
 	}
 
@@ -47,7 +48,7 @@ public class MyView extends JPanel {
 		
 		Graphics2D g2d = (Graphics2D)g;
 		
-		g2d.setColor(Color.BLUE);
+		g2d.setColor(color);
 		g2d.setStroke(new BasicStroke(4));
 
 		for (LinkedList<HashMap<String,Integer>> line : lines) {
@@ -58,6 +59,12 @@ public class MyView extends JPanel {
 				
 			}
 		}
+	}
+	
+	public Color getPaintColor() {return color;}
+	public void setPaintColor(Color color) {
+		this.color=color;
+		repaint();
 	}
 	
 	private class MyMouseListener extends MouseAdapter {
@@ -108,13 +115,21 @@ public class MyView extends JPanel {
 		}
 	}
 	
-	public void saveJPEG() throws IOException {
+	public LinkedList<LinkedList<HashMap<String,Integer>>> getLines(){
+		return lines;
+	}
+	public void setLines(LinkedList<LinkedList<HashMap<String,Integer>>> lines) {
+		this.lines = lines;
+		repaint();
+	}
+	
+	public void saveJPEG(String filename) throws IOException {
 		BufferedImage paintImage = new BufferedImage(viewW, viewH, BufferedImage.TYPE_3BYTE_BGR);
 		Graphics2D g2d = paintImage.createGraphics();
 		paint(g2d);
 		
 		try{
-	        ImageIO.write(paintImage, "jpeg", new File("mytest/brad.jpg"));
+	        ImageIO.write(paintImage, "jpeg", new File(filename));
         }catch(IOException e){
         	throw new IOException();
         }
