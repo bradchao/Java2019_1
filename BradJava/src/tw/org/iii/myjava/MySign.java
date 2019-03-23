@@ -21,9 +21,10 @@ public class MySign extends JFrame{
 		clear = new JButton("Clear");
 		undo = new JButton("Undo");
 		redo = new JButton("Redo");
+		saveJPEG = new JButton("Save JPG");
 		
 		JPanel top = new JPanel(new FlowLayout());
-		top.add(clear);top.add(undo);top.add(redo);
+		top.add(clear);top.add(undo);top.add(redo); top.add(saveJPEG);
 		
 		add(top, BorderLayout.NORTH);
 		
@@ -51,6 +52,13 @@ public class MySign extends JFrame{
 			}
 		});
 		
+		saveJPEG.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				myView.saveJPEG();
+			}
+		});
+
 		
 		setSize(640, 480);
 		setVisible(true);

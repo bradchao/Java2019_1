@@ -6,14 +6,19 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class MyView extends JPanel {
 	private LinkedList<LinkedList<HashMap<String,Integer>>> lines, recycler;
-	
+	private int viewW, viewH;
+	private boolean isInit;
 	
 	public MyView() {
 		setBackground(Color.YELLOW);
@@ -23,11 +28,23 @@ public class MyView extends JPanel {
 		
 		lines = new LinkedList<>();
 		recycler = new LinkedList<>();
+		
+		
+		
 	}
 
+	private void init() {
+		viewW = getWidth(); viewH = getHeight();
+		System.out.println(viewW + " x " + viewH);
+		isInit = true;
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		if (!isInit) init();
+		
 		Graphics2D g2d = (Graphics2D)g;
 		
 		g2d.setColor(Color.BLUE);
@@ -89,6 +106,19 @@ public class MyView extends JPanel {
 			lines.add(recycler.removeLast());
 			repaint();
 		}
+	}
+	
+	public void saveJPEG() {
+		BufferedImage paintImage = new BufferedImage(viewW, viewH, BufferedImage.TYPE_3BYTE_BGR);
+		Graphics2D g2d = paintImage.createGraphics();
+		paint(g2d);
+		
+		try{
+	        ImageIO.write(paintImage, "jpeg", new File("mytest/brad.jpg"));
+        }catch(IOException e){
+        	System.out.println(e.toString());
+        }
+		
 	}
 	
 	private static HashMap<String,Integer> parsePoint(MouseEvent e){
