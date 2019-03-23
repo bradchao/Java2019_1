@@ -46,9 +46,7 @@ public class MyView extends JPanel {
 		@Override
 		public void mouseDragged(MouseEvent e) {
 			super.mouseDragged(e);
-			int ex = e.getX(), ey = e.getY();
-			HashMap<String,Integer> point = new HashMap<>();
-			point.put("x", ex); point.put("y", ey);
+			HashMap<String,Integer> point = parsePoint(e);
 			
 			lines.getLast().add(point);
 			repaint();
@@ -57,10 +55,7 @@ public class MyView extends JPanel {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			super.mousePressed(e);
-			
-			int ex = e.getX(), ey = e.getY();
-			HashMap<String,Integer> point = new HashMap<>();
-			point.put("x", ex); point.put("y", ey);
+			HashMap<String,Integer> point = parsePoint(e);
 			
 			// a new Line
 			LinkedList<HashMap<String,Integer>> line = new LinkedList<>();
@@ -69,7 +64,22 @@ public class MyView extends JPanel {
 			lines.add(line);
 			
 		}
+		
 		 
 	}
+	
+	public void clearView() {
+		lines.clear();
+		repaint();
+	}
+	
+	private static HashMap<String,Integer> parsePoint(MouseEvent e){
+		int ex = e.getX(), ey = e.getY();
+		HashMap<String,Integer> point = new HashMap<>();
+		point.put("x", ex); point.put("y", ey);
+		return point;
+	}
+	
+	
 	
 }

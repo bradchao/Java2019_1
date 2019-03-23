@@ -2,6 +2,8 @@ package tw.org.iii.myjava;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,6 +29,13 @@ public class MySign extends JFrame{
 		
 		myView = new MyView();
 		add(myView, BorderLayout.CENTER);
+		
+		clear.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				myView.clearView();
+			}
+		});
 		
 		
 		setSize(640, 480);
