@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import javax.swing.JPanel;
 
 public class MyView extends JPanel {
-	private LinkedList<HashMap<String,Integer>> line;
+	private LinkedList<LinkedList<HashMap<String,Integer>>> lines;
 	
 	
 	public MyView() {
@@ -21,7 +21,7 @@ public class MyView extends JPanel {
 		addMouseListener(myMouseListener);
 		addMouseMotionListener(myMouseListener);
 		
-		line = new LinkedList<>();
+		lines = new LinkedList<>();
 	}
 
 	@Override
@@ -32,16 +32,14 @@ public class MyView extends JPanel {
 		g2d.setColor(Color.BLUE);
 		g2d.setStroke(new BasicStroke(4));
 
-		for (int i=1; i<line.size(); i++) {
-			HashMap<String,Integer> p0 = line.get(i-1);
-			HashMap<String,Integer> p1 = line.get(i);
-			g2d.drawLine(p0.get("x"), p0.get("y"), p1.get("x"), p1.get("y"));
-			
+		for (LinkedList<HashMap<String,Integer>> line : lines) {
+			for (int i=1; i<line.size(); i++) {
+				HashMap<String,Integer> p0 = line.get(i-1);
+				HashMap<String,Integer> p1 = line.get(i);
+				g2d.drawLine(p0.get("x"), p0.get("y"), p1.get("x"), p1.get("y"));
+				
+			}
 		}
-		
-		
-		
-		
 	}
 	
 	private class MyMouseListener extends MouseAdapter {
@@ -51,8 +49,8 @@ public class MyView extends JPanel {
 			int ex = e.getX(), ey = e.getY();
 			HashMap<String,Integer> point = new HashMap<>();
 			point.put("x", ex); point.put("y", ey);
-			line.add(point);
 			
+			lines.getLast().add(point);
 			repaint();
 		}
 		
@@ -63,7 +61,12 @@ public class MyView extends JPanel {
 			int ex = e.getX(), ey = e.getY();
 			HashMap<String,Integer> point = new HashMap<>();
 			point.put("x", ex); point.put("y", ey);
+			
+			// a new Line
+			LinkedList<HashMap<String,Integer>> line = new LinkedList<>();
 			line.add(point);
+			
+			lines.add(line);
 			
 		}
 		 
