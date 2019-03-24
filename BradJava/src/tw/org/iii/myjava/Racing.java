@@ -26,6 +26,17 @@ public class Racing extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
+	private class Car extends Thread {
+		int lane;
+		Car(int lane){this.lane = lane;}
+		@Override
+		public void run() {
+			for (int i=0; i<100; i++) {
+				lanes[lane].setText(lanes[lane].getText() + ">");
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
 		new Racing();
 	}
