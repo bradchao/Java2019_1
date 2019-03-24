@@ -20,9 +20,10 @@ public class Racing extends JFrame {
 		add(go);
 		for (int i=0; i<8; i++) {
 			lanes[i] = new JLabel();
-			lanes[i].setText((i+1) + ":");
 			add(lanes[i]);
 		}
+		
+		clearLane();
 		
 		go.addActionListener(new ActionListener() {
 			@Override
@@ -36,7 +37,14 @@ public class Racing extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
+	private void clearLane() {
+		for (int i=0; i<8; i++) {
+			lanes[i].setText((i+1) + ":");
+		}
+	}
+	
 	private void go() {
+		clearLane();
 		for (int i=0; i<8; i++) {
 			cars[i] = new Car(i);
 			cars[i].start();
@@ -50,6 +58,11 @@ public class Racing extends JFrame {
 		public void run() {
 			for (int i=0; i<100; i++) {
 				lanes[lane].setText(lanes[lane].getText() + ">");
+				try {
+					Thread.sleep(10 + (int)(Math.random()*200));
+				}catch(Exception e) {
+					
+				}
 			}
 		}
 	}
