@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 public class MySign extends JFrame{
 	private JButton clear, undo, redo, saveJPEG, saveObj, loadObj, changeColor;
 	private MyView myView;
+	private MyClock2 myClock2;
 	
 	public MySign() {
 		super("簽名城市");
@@ -37,7 +38,10 @@ public class MySign extends JFrame{
 		loadObj = new JButton("Load Obj");
 		changeColor = new JButton("Color");
 		
+		myClock2 = new MyClock2();
+		
 		JPanel top = new JPanel(new FlowLayout());
+		top.add(myClock2);
 		top.add(clear);top.add(undo);top.add(redo); top.add(saveJPEG);
 		top.add(saveObj); top.add(loadObj);top.add(changeColor);
 		
