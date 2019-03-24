@@ -1,6 +1,8 @@
 package tw.org.iii.myjava;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -8,6 +10,7 @@ import javax.swing.JLabel;
 
 public class Racing extends JFrame {
 	private JLabel[] lanes = new JLabel[8];
+	private Car[] cars = new Car[8];
 	private JButton go;
 	
 	public Racing() {
@@ -21,9 +24,23 @@ public class Racing extends JFrame {
 			add(lanes[i]);
 		}
 		
+		go.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				go();
+			}
+		});
+		
 		setSize(640, 480);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
+	
+	private void go() {
+		for (int i=0; i<8; i++) {
+			cars[i] = new Car(i);
+			cars[i].start();
+		}
 	}
 	
 	private class Car extends Thread {
