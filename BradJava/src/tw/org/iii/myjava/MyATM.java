@@ -16,7 +16,7 @@ class ATM {
 	private int limit = 1000;
 	private int money;
 	void add(int add) {
-		if (money + add > 1000) {
+		if (money + add > limit) {
 			System.out.println("add:xxx");
 		}else {
 			money += add;
@@ -38,7 +38,9 @@ class Bank extends Thread {
 	@Override
 	public void run() {
 		for (int i=0; i<10; i++) {
-			atm.add(500);
+			synchronized (atm) {
+				atm.add(500);
+			}
 			try {
 				Thread.sleep(1000);
 			}catch (Exception e) {
@@ -53,7 +55,9 @@ class Person extends Thread {
 	@Override
 	public void run() {
 		for (int i=0; i<50; i++) {
-			atm.get((int)(Math.random()*100+1), name);
+			synchronized (atm) {
+				atm.get((int)(Math.random()*100+1), name);
+			}
 			try {
 				Thread.sleep(100);
 			}catch (Exception e) {
