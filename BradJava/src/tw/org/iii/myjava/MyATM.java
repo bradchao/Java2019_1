@@ -41,5 +41,18 @@ class Bank extends Thread {
 }
 class Person extends Thread {
 	private ATM atm;
+	private String name;
+	Person(ATM atm, String name){this.atm = atm; this.name = name;}
+	@Override
+	public void run() {
+		for (int i=0; i<50; i++) {
+			atm.get((int)(Math.random()*100+1), name);
+			try {
+				Thread.sleep(100);
+			}catch (Exception e) {
+			}
+		}
+		System.out.println(name + ":stop");
+	}
 	
 }
