@@ -4,8 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.LinkedList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -29,7 +32,7 @@ public class MyGame extends JFrame{
 	private class GamePanel extends JPanel{
 		private BufferedImage ball;
 		private Timer timer;
-		private BallTask ballTask;
+		private LinkedList<BallTask> ballTasks;
 		private int viewW, viewH, ballW, ballH;
 		
 		GamePanel(){
@@ -38,14 +41,27 @@ public class MyGame extends JFrame{
 			try {
 				ball = ImageIO.read(new File("mytest/ball.png"));
 				ballW = ball.getWidth(); ballH = ball.getHeight();
-				ballTask = new BallTask(100,100);
 				timer.schedule(new MyResfresh(), 0, 12);
-				timer.schedule(ballTask, 1*1000, 30);
 				
+				ballTasks = new LinkedList<>();
+				
+				addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						addBall(e.getX()-(int)(ballW/2f), e.getY()-(int)(ballH/2f));
+					}
+				});
 				
 			}catch(Exception e) {
 				
 			}
+			
+		}
+		
+		private void addBall(int x, int y) {
+			BallTask ballTask = new BallTask(x,y);
+			timer.schedule(ballTask, 1*1000, 30);
+			ballTasks.add(ballTask);
 			
 		}
 		
@@ -79,7 +95,9 @@ public class MyGame extends JFrame{
 			super.paintComponent(g);
 			viewW = getWidth(); viewH = getHeight();
 			Graphics2D g2d = (Graphics2D)g;
-			g2d.drawImage(ball, ballTask.x, ballTask.y, null);
+			for (BallTask ballTask: ballTasks) {
+				g2d.drawImage(ball, ballTask.x, ballTask.y, null);
+			}
 			
 			
 		}
