@@ -2,7 +2,14 @@ package tw.org.iii.myjava;
 
 public class MyATM {
 	public static void main(String[] args) {
-
+		ATM atm = new ATM();
+		Bank bank = new Bank(atm);
+		Person pA = new Person(atm, "A");
+		Person pB = new Person(atm, "B");
+		Person pC = new Person(atm, "C");
+		Person pD = new Person(atm, "D");
+		bank.start();
+		pA.start();pB.start();pC.start();pD.start();
 	}
 }
 class ATM {
